@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "adicionais.h"
 #include "filas.h"
 #include "pilhas.h"
@@ -13,16 +14,34 @@ int main() {
     char *nome_f;
 
     cadastro();
+
     fila = inserir(fila, "Alice");
     fila = inserir(fila, "Bruno");
     fila = inserir(fila, "Carlos");
     fila = inserir(fila, "Daniel");
     fila = inserir(fila, "Elena");
+    fila = inserir(fila, "Fernanda");
     
-    exibirfila();
+    antesdafila();
     imprimir_fila(fila);
 
-    printf("\n--- REMOVENDO 2 PESSOAS DA FILA ---\n");
+
+
+
+    mudarcor(3);
+    printf("\n=================================================\n");
+    mudarcor(2);
+    printf("Aperte ENTER para REMOVERMOS 2 PESSOAS DA FILA...\n");
+    mudarcor(3);
+    printf("=================================================\n");
+    mudarcor(0);
+    getchar();
+
+
+    mudarcor(1);
+    printf("VREMOVENDO ESSAS 2 PESSOAS DA FILA...\n");
+    mudarcor(0);
+
     for(int i = 0; i < 2; i++) {
         fila = remover(fila, &nome_f);
         if (nome_f) {
@@ -30,6 +49,10 @@ int main() {
             free(nome_f); 
         }
     }
+
+    mudarcor(4);
+    printf("\nComo ficou a fila após as remoções:\n");
+    mudarcor(0);
     imprimir_fila(fila);
     destruir_fila(fila); 
 
@@ -37,6 +60,16 @@ int main() {
   
     struct No *pilha = NULL;
     char *nome_p;
+
+    mudarcor(3);
+    printf("\n=================================================\n");
+    mudarcor(2);
+    printf("Aperte ENTER para EMPILHAR 5 NOMES na PILHA...\n");
+    mudarcor(3);
+    printf("=================================================\n");
+    mudarcor(0);
+    getchar();
+
 
     printf("\n\n--- EMPILHANDO 5 NOMES ---\n");
     push(pilha, "Zico"); 

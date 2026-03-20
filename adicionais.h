@@ -10,12 +10,12 @@ struct No {
     struct No *prox;
 };
 
-void mudarCor(int cor);
+void mudarcor(int cor);
 void limpartela();
 void exibirfila();
 void exibirpilha();
 void cadastro();
-
+void antesdafila();
 
 
 
