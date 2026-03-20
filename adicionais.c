@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "adicionais.h"
 
 void limpartela(){
     system("clear");
@@ -21,6 +22,17 @@ void mudarcor(int cor) {
     }
 }
 
+void exibirfila(){
+    mudarcor(3);
+        printf("    _______  __ ________  _____   ______  ____     ____________    ___           ______      _      _            __       _______           __\n");
+    printf("   / ____/ |/ //  _/ __ )/  _/ | / / __ \\/ __ \\   / ____/  _/ /   /   |         / /  _/___  (_)____(_)___        \\ \\     / ____(_)___ ___  / /\n");
+    printf("  / __/  |   / / // __  |/ //  |/ / / / / / / /  / /_   / // /   / /| |        / // // __ \\/ / ___/ / __ \\   _____\\ \\   / /_  / / __ `__ \\/ / \n");
+    printf(" / /___ /   |_/ // /_/ // // /|  / /_/ / /_/ /  / __/ _/ // /___/ ___ |       / // // / / / / /__/ / /_/ /  /_____/ /  / __/ / / / / / / / /  \n");
+    printf("/_____//_/|_/___/_____/___/_/ |_/_____/\\____/  /_/   /___/_____/_/  |_|      / /___/_/ /_/_/\\___/_/\\____/        /_/  /_/   /_/_/ /_/ /_/ /   \n");
+    printf("                                                                            /_/                                                        /_/  \n");
+    mudarcor(0);
+};
+
 void cadastro(){
     mudarcor(2);
     printf("==================================================================================================================================================================================================================\n");
@@ -38,62 +50,4 @@ void cadastro(){
     mudarcor(2);
     printf("\n==================================================================================================================================================================================================================\n");
     mudarcor(0);
-}
-
-
-struct No {
-    char *nome;
-    struct No *prox;
-};
-
-
-// Essa Struct serve para inserir um nome no final da fila e a função tem que retornar um ponteiro para a fila atualizada, ou seja, o início da fila.
-struct No *inserir(struct No *fila, char *nome){
-    // aloca memória para um novo nó da fila
-    struct No *novo = malloc(sizeof(struct No));
-    if (novo == NULL){
-        printf("Erro ao alocar memória para o novo nó.\n");
-        return fila;
-    }
-
-    novo->nome = strdup(nome); // Aloca memória para a string e copia o nome
-    novo->prox = NULL;
-
-    // Se a fila estiver vazia, o novo nó é o início
-    if (fila == NULL) {
-        return novo;
-    }
-
-    // Agora vamos fazer um loop para encontrar o final da fila e inserir o novo nó lá
-    struct No *atual = fila;
-    //Em geral aqui é enquanto o próximo nó não for NULL ou seja, enquanto não chegar no final da fila continua avançando, até chegar na condição de atual -> prox ser NULL ou seja o final da fila e aí sim inserir o novo nó.
-
-    while (atual->prox != NULL) {
-        atual = atual->prox;
-    }
-
-    atual->prox = novo;
-
-    return fila; // Retorna o ponteiro para a fila atualizada
-}
-
-struct No *remover(struct No *fila, char **nome){
-    // Como no pdf o Sr. colocou "o valor NULL é retornado através do parâmetro nome" creio que seja essa a melhor forma de se fazer passando ponteiro para ponteiro.
-    if(fila == NULL){
-        *nome = NULL;
-        return NULL;
-    }
-
-    struct No *removido = fila;
-    *nome = removido->nome; // Passa o ponteiro da string para o usuário
-    fila = fila->prox; // Atualizando o começinho lá da fila
-
-    free(removido);
-    return fila;
-}
-
-int main(){
-    limpartela();
-    cadastro();
-    printf("Olá\n");
 }

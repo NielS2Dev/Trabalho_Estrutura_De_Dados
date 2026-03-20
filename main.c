@@ -1,108 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-// Definição do nó da lista simplesmente ligada, conforme o documento
-struct No {
-    char *nome;
-    struct No *prox;
-};
-
-// ==========================================
-// TRABALHO DE FILAS (Queue)
-// ==========================================
-
-// Inserir: Insere um nome no final da fila.
-struct No *inserir(struct No *fila, char *nome) {
-    struct No *novo = (struct No *)malloc(sizeof(struct No));
-    if (novo == NULL) return fila;
-    
-    // Aloca memória para a string para evitar problemas de escopo
-    novo->nome = strdup(nome);
-    novo->prox = NULL;
-
-    // Se a fila estiver vazia, o novo nó é o início
-    if (fila == NULL) {
-        return novo;
-    }
-
-    // Caso contrário, percorre até o final e insere
-    // Estou criando um ponteiro chamado atual para meio que pecorrer a fila, e quando chegar no final o próximo do último nó vai apontar para o novo nó xD
-    
-    struct No *atual = fila;
-    while (atual->prox != NULL) {
-        atual = atual->prox;
-    }
-    atual->prox = novo;
-
-    return fila; // Retorna o ponteiro para a fila atualizada
-}
-
-// Remover: Remove um elemento do início da fila.
-struct No *remover(struct No *fila, char **nome) {
-    if (fila == NULL) {
-        *nome = NULL; // Retorna NULL se não for possível remover
-        return NULL;
-    }
-
-    struct No *removido = fila;
-    *nome = removido->nome; // Passa o ponteiro da string para o usuário
-    fila = fila->prox;      // Atualiza o início da fila
-
-    free(removido); // Libera apenas o nó, o nome será liberado pelo usuário
-    return fila;
-}
-
-// Tamanho: Retorna a quantidade de elementos na fila.
-int tamanho_fila(struct No *fila) {
-    int cont = 0;
-    struct No *atual = fila;
-    while (atual != NULL) {
-        cont++;
-        atual = atual->prox;
-    }
-    return cont;
-}
-
-// Imprimir: Imprime do início ao fim da fila.
-void imprimir_fila(struct No *fila) {
-    struct No *atual = fila;
-    printf("\n--- EXIBINDO FILA (Inicio -> Fim) ---\n");
-    while (atual != NULL) {
-        // Mostra o nome e o endereço do próximo nó para provar a ligação
-        printf("[%s | Prox: %p] -> ", atual->nome, (void*)atual->prox);
-        atual = atual->prox;
-    }
-    printf("NULL\n");
-}
-
-// Destruir: Libera a memória da fila e das strings.
-void destruir_fila(struct No *fila) {
-    struct No *atual = fila;
-    struct No *prox_no;
-    while (atual != NULL) {
-        prox_no = atual->prox;
-        free(atual->nome); // Libera a string
-        free(atual);       // Libera o nó
-        atual = prox_no;
-    }
-}
+#include "adicionais.h"
+#include "filas.h"
 
 
-// ==========================================
-// TRABALHO DE PILHAS (Stack)
-// ==========================================
-
-// Push: Insere um nome no topo da pilha.
-struct No *push(struct No *pilha, char *nome) {
-    struct No *novo = (struct No *)malloc(sizeof(struct No));
-    if (novo == NULL) return pilha;
-
-    novo->nome = strdup(nome);
-    novo->prox = pilha; // O novo nó aponta para o antigo topo
-
-    return novo; // O novo nó passa a ser o topo da pilha
-}
 
 // Pop: Remove um elemento do topo da pilha.
 struct No *pop(struct No *pilha, char **nome) {
@@ -158,11 +60,13 @@ void destruir_pilha(struct No *pilha) {
     }
 }
 
-
 // ==========================================
 // FUNÇÃO MAIN PARA TESTAR O CÓDIGO
 // ==========================================
 int main() {
+    limpartela();
+    cadastro();
+
     // --- TESTE AMPLIADO DE FILA ---
     struct No *fila = NULL;
     char *nome_f;
