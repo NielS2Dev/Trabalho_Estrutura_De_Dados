@@ -13,6 +13,7 @@ struct No {
 void mudarCor(int cor);
 void limpartela();
 void exibirfila();
+void exibirpilha();
 void cadastro();
 
 

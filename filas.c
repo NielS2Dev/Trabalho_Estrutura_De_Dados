@@ -65,9 +65,8 @@ int tamanho_fila(struct No *fila){
 
 void imprimir_fila(struct No *fila){
     struct No *atual = fila;
-    exibirfila();
     while (atual != NULL) {
-        // Mostra o nome e o endereço do próximo nó para provar a ligação
+        // Mostrando o nome e o endereço do próximo nó para provar a ligação
         printf("[%s | Prox: %p] -> ", atual->nome, (void*)atual->prox);
         atual = atual->prox;
     }
@@ -79,8 +78,8 @@ void destruir_fila(struct No *fila) {
     struct No *prox_no;
     while (atual != NULL) {
         prox_no = atual->prox;
-        free(atual->nome); // Libera a string
-        free(atual);       // Libera o nó
+        free(atual->nome); 
+        free(atual);       
         atual = prox_no;
     }
 }
